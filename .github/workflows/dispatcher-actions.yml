@@ -180,7 +180,6 @@ jobs:
 #        -or -name "*sysupgrade.bin" \
 #        -or -name "sha256sums" \
 #        | xargs -i mv -f {} ./firmware/
-#        cp openwrt/.config  ./firmware/${{matrix.target}}.config
         cd openwrt/bin/targets/*/*
         rm -rf packages
 #        cd firmware
