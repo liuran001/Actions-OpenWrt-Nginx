@@ -181,23 +181,13 @@ jobs:
     - name: Organize files
       id: organize
       run: |
-#        mkdir firmware && find openwrt/bin/*/*/*/ -maxdepth 1 \
-#        -name "*combined*" \
-#        -or -name "*sysupgrade.bin" \
-#        -or -name "sha256sums" \
-#        | xargs -i mv -f {} ./firmware/
         cd openwrt/bin/targets/*/*
         rm -rf packages
-#        cd firmware
-#        mv sha256sums ${{matrix.target}}_sha256sums
-#        rename -v "s/^openwrt/${{ env.date3 }}-openwrt/" *combined*
-#        rename -v "s/^openwrt/${{ env.date3 }}-openwrt/" *bin
         echo "::set-env name=FIRMWARE::$PWD"
         Emoji=("🎉" "🤞" "✨" "🎁" "🎈" "🎄" "🎨" "💋" "🍓" "🍕" "🍉" "💐" "🌴" "🚀" "🛸" "🗽" "⛅" "🌈" "🔥" "⛄" "🐶" "🏅" "🦄" "🐤")
         RANDOM=$$$(date +%s)
         rand=$[$RANDOM % ${#Emoji[@]}]
         echo "::set-env name=EMOJI::${Emoji[$rand]}"
-#        [ ${{matrix.target}} == "phicomm-k2p" ] && echo "::set-env name=NOTICE::刷机时breed里的闪存布局请选择斐讯而非默认的公版" || echo "::set-env name=NOTICE::请分配不少于800M的存储容量"
  
     - name: Upload firmware to cowtransfer
       if: env.UPLOAD_FIRMWARE_TO_COWTRANSFER == 'true'
